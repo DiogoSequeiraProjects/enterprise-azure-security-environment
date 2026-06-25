@@ -311,10 +311,9 @@ It combines cloud architecture, security, networking, governance, monitoring, an
 
 **Diogo Sequeira**
 
-Computer Engineering Student with a strong interest in Cloud Security, Microsoft Azure, and Infrastructure as Code.
+Computer Engineering Student | Cloud Security Enthusiast
 
-* GitHub: *(Add your profile link)*
-* LinkedIn: *(Add your profile link)*
+Focused on Azure Security, Cloud Governance, Infrastructure Security and DevSecOps.
 
 ---
 

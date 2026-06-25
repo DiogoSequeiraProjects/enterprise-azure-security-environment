@@ -15,3 +15,16 @@ variable "owner" {
   type        = string
   default     = "Diogo-Sequeira"
 }
+
+variable "tags" {
+  description = "Common tags applied to all resources."
+  type        = map(string)
+
+  default = {
+    Project     = "Enterprise Azure Security Environment"
+    Owner       = "Diogo Sequeira"
+    Environment = "Portfolio"
+    ManagedBy   = "Terraform"
+    Purpose     = "Cloud Security Portfolio"
+  }
+}

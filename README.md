@@ -1,370 +1,323 @@
+# Enterprise Azure Security Environment
 
-# Introduction
+![Azure](https://img.shields.io/badge/Cloud-Microsoft%20Azure-0078D4?logo=microsoftazure\&logoColor=white)
+![Terraform](https://img.shields.io/badge/IaC-Terraform-623CE4?logo=terraform\&logoColor=white)
+![Security](https://img.shields.io/badge/Security-Enterprise-success)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
-The current implementation provides a secure, well-governed, and enterprise-inspired Azure environment while remaining within the Azure Free Tier.
-
-Although the project successfully demonstrates key cloud security concepts, a production-grade enterprise environment would include additional services and advanced security capabilities.
-
-This document outlines the planned evolution of the project and highlights future improvements that would further strengthen security, governance, scalability, and operational resilience.
-
----
-
-# Security Enhancements
-
-## Azure Firewall Premium
-
-One of the most significant future improvements would be the deployment of Azure Firewall Premium.
-
-Instead of relying exclusively on Network Security Groups, Azure Firewall would provide centralized traffic inspection across the Hub-and-Spoke architecture.
-
-Key benefits include:
-
-* Centralized network security
-* Application rule collections
-* Network rule collections
-* Threat Intelligence filtering
-* TLS inspection
-* Intrusion Detection and Prevention System (IDPS)
-* Centralized logging
-
-This would significantly improve east-west and north-south traffic inspection.
+Enterprise-inspired Azure cloud environment implementing secure networking, governance, monitoring, and Infrastructure as Code following Microsoft best practices.
 
 ---
 
-## Microsoft Defender for Cloud (Enhanced Plans)
+# Project Overview
 
-The project currently uses the free Defender for Cloud capabilities.
+This project demonstrates the design and implementation of a secure Azure environment based on enterprise cloud architecture principles.
 
-Future versions could enable advanced Defender plans for:
+The objective was to build a production-inspired Azure Landing Zone using only Azure Free Tier services while applying security, governance, networking, monitoring, and Infrastructure as Code best practices.
 
-* Virtual Machines
-* Storage Accounts
-* Key Vault
-* Containers
-* SQL Databases
-* App Services
-
-These capabilities would provide:
-
-* Continuous threat detection
-* Vulnerability assessment
-* Attack path analysis
-* Security recommendations
-* Regulatory compliance monitoring
+Rather than deploying workloads, the focus is on creating a secure cloud foundation suitable for future enterprise applications.
 
 ---
 
-## Microsoft Sentinel
+# Objectives
 
-Microsoft Sentinel would extend the monitoring capabilities into a complete cloud-native Security Information and Event Management (SIEM) platform.
-
-Sentinel would collect logs from multiple Azure services and enable:
-
-* Centralized security monitoring
-* Threat hunting
-* Incident investigation
-* Automated response
-* Security analytics
-* MITRE ATT&CK mapping
-
-Integrating Sentinel would transform the environment into a Security Operations Center (SOC)-ready platform.
+* Design an enterprise-style Azure environment.
+* Implement Hub-and-Spoke networking.
+* Apply Zero Trust principles.
+* Enforce governance with Azure Policy.
+* Protect resources using RBAC.
+* Secure secrets with Azure Key Vault.
+* Restrict public exposure using Private Endpoints.
+* Centralize monitoring with Azure Monitor and Log Analytics.
+* Demonstrate Infrastructure as Code using Terraform.
+* Maintain comprehensive technical documentation.
 
 ---
 
-## Microsoft Entra Privileged Identity Management (PIM)
+# Architecture
 
-Administrative privileges should not remain permanently assigned.
+```
+Azure Subscription
+│
+├── rg-enterprise-network
+├── rg-enterprise-security
+├── rg-enterprise-monitoring
+├── rg-enterprise-identity
+├── rg-enterprise-dev
+└── rg-enterprise-prod
+```
 
-Microsoft Entra PIM introduces Just-In-Time administrative access.
+Networking follows a Hub-and-Spoke topology.
 
-Benefits include:
-
-* Temporary privileged access
-* Approval workflows
-* Multi-Factor Authentication enforcement
-* Audit trails
-* Reduced attack surface
-
-PIM is considered a best practice in enterprise identity security.
-
----
-
-# Networking Improvements
-
-## Azure Bastion
-
-Instead of exposing management services to the internet, Azure Bastion would provide secure browser-based administration through the Azure Portal.
-
-Benefits include:
-
-* No public IP addresses
-* Secure remote administration
-* Reduced attack surface
-* Simplified operational management
+```
+                    Hub VNet
+          ┌────────────┼────────────┐
+          │            │            │
+   Management     Shared Services   Security
+          │
+      VNet Peering
+      ┌───────────────┐
+      │               │
+  DEV VNet       PROD VNet
+  App | Data     App | Data
+```
 
 ---
 
-## Azure VPN Gateway
+# Azure Services Implemented
 
-Future versions could securely connect on-premises environments to Azure through encrypted VPN tunnels.
-
-This would allow hybrid cloud scenarios while maintaining secure communication.
-
----
-
-## ExpressRoute
-
-For enterprise production environments, ExpressRoute would replace internet-based connectivity with dedicated private Microsoft backbone connections.
-
-Advantages include:
-
-* Lower latency
-* Higher availability
-* Improved reliability
-* Increased bandwidth
-* Private connectivity
+| Category               | Services                                                                           |
+| ---------------------- | ---------------------------------------------------------------------------------- |
+| Networking             | Virtual Networks, Subnets, VNet Peering, NSGs, Route Tables                        |
+| Identity               | Azure RBAC, Managed Identity                                                       |
+| Governance             | Azure Policy, Resource Locks, Tags                                                 |
+| Security               | Azure Key Vault, Private Endpoint, Private DNS Zone                                |
+| Monitoring             | Azure Monitor, Log Analytics Workspace, Diagnostic Settings, Alerts, Action Groups |
+| Cost Management        | Budget, Cost Analysis                                                              |
+| Infrastructure as Code | Terraform                                                                          |
 
 ---
 
-## Azure Virtual WAN
+# Security Controls
 
-As cloud environments expand across multiple regions and offices, Azure Virtual WAN simplifies large-scale network management.
+The project implements multiple layers of security following Microsoft's Defense-in-Depth strategy.
 
-Future implementations could integrate:
+Implemented controls include:
 
-* Branch connectivity
-* Global transit
-* VPN
-* ExpressRoute
-* SD-WAN integration
-
----
-
-# Governance Improvements
-
-## Azure Policy Initiatives
-
-Instead of assigning individual policies separately, Policy Initiatives would group multiple policies into reusable governance frameworks.
-
-Examples include:
-
-* Security Baseline
-* Resource Naming Standards
-* Production Compliance
-* Regulatory Compliance
+* Role-Based Access Control (RBAC)
+* Principle of Least Privilege
+* Azure Policy
+* Resource Locks
+* Hub-and-Spoke Network Segmentation
+* Network Security Groups
+* Route Tables
+* Azure Key Vault
+* Managed Identity
+* Private Endpoints
+* Private DNS Zones
+* Azure Monitor
+* Log Analytics Workspace
+* Diagnostic Settings
+* Azure Monitor Alerts
+* Cost Management
 
 ---
 
-## Azure Blueprints
+# Networking Design
 
-Although Azure Blueprints has largely been superseded by Deployment Stacks and other governance features, similar deployment governance concepts could be explored to standardize enterprise environments.
+The environment follows a Hub-and-Spoke architecture.
 
-This would simplify environment provisioning while maintaining compliance requirements.
+### Hub Network
 
----
+* Shared Services
+* Security Resources
+* Centralized Management
 
-## Management Groups
+### Development Network
 
-Large organizations commonly organize Azure subscriptions using Management Groups.
+* Application Subnet
+* Data Subnet
 
-Future versions of this project could simulate:
+### Production Network
 
-* Enterprise
+* Application Subnet
+* Data Subnet
 
-  * Production
-  * Development
-  * Sandbox
-  * Shared Services
+Benefits:
 
-This would better represent multi-subscription enterprise environments.
-
----
-
-# Identity Improvements
-
-## Conditional Access
-
-Conditional Access policies could be implemented to enforce identity-based security decisions.
-
-Examples include:
-
-* MFA enforcement
-* Device compliance
-* Geographic restrictions
-* Risk-based authentication
-* Session controls
-
-Conditional Access represents one of the most important Zero Trust controls in Microsoft Entra ID.
-
----
-
-## Passwordless Authentication
-
-Future implementations could adopt passwordless authentication methods including:
-
-* Microsoft Authenticator
-* Windows Hello for Business
-* FIDO2 Security Keys
-
-These technologies improve both usability and security.
-
----
-
-# Monitoring Improvements
-
-## Azure Monitor Workbooks
-
-Interactive dashboards could be created to visualize:
-
-* Resource Health
-* Security Events
-* Activity Logs
-* Cost Analysis
-* Network Traffic
-
-Workbooks significantly improve operational visibility.
-
----
-
-## Advanced Alerting
-
-Additional monitoring rules could include:
-
-* Administrative activity
-* Policy violations
-* Resource deletion
-* Failed authentication attempts
-* Network anomalies
-* Key Vault access events
-
-These alerts would improve incident detection capabilities.
-
----
-
-## Long-Term Log Retention
-
-Future implementations could configure:
-
-* Extended retention periods
-* Archive storage
-* Immutable storage
-* Compliance retention policies
-
-This would support regulatory requirements and forensic investigations.
-
----
-
-# Infrastructure as Code Improvements
-
-The current Terraform implementation provides the initial project structure.
-
-Future improvements include:
-
-* Reusable Terraform modules
-* Remote state storage
-* Azure Storage backend
-* State locking
-* Environment variables
-* Multiple environments
-* Automated validation
-* Automated deployment
-
-These improvements would align the project with enterprise Infrastructure as Code practices.
-
----
-
-# CI/CD Improvements
-
-A complete DevSecOps pipeline could be implemented using GitHub Actions.
-
-Possible pipeline stages include:
-
-1. Terraform Format Validation
-2. Terraform Validate
-3. Terraform Plan
-4. Terraform Security Scan
-5. Checkov Analysis
-6. TFLint Validation
-7. Manual Approval
-8. Terraform Apply
-
-This workflow would automate infrastructure deployments while maintaining security and governance controls.
-
----
-
-# Security Scanning
-
-Future versions could integrate automated security scanning tools such as:
-
-* Checkov
-* TFLint
-* tfsec
-* Trivy
-* Microsoft Defender for DevOps
-
-These tools would identify security misconfigurations before deployment.
-
----
-
-# High Availability
-
-To better simulate production environments, future versions could implement:
-
-* Availability Zones
-* Load Balancers
-* Multiple Regions
-* Geo-redundant Storage
-* Backup Vault
-* Disaster Recovery planning
-
-These additions would improve resilience and business continuity.
-
----
-
-# Compliance
-
-Future enhancements could include compliance frameworks such as:
-
-* ISO/IEC 27001
-* CIS Microsoft Azure Foundations Benchmark
-* NIST Cybersecurity Framework
-* Microsoft Cloud Security Benchmark
-
-Azure Policy could then be used to continuously evaluate compliance against these standards.
-
----
-
-# Documentation Improvements
-
-As the project evolves, the documentation can also be expanded to include:
-
-* Architecture Decision Records (ADRs)
-* Network diagrams
-* Security diagrams
-* Runbooks
-* Operational procedures
-* Incident response playbooks
-* Disaster recovery documentation
-
-Comprehensive documentation is a critical component of enterprise cloud environments.
-
----
-
-# Long-Term Vision
-
-The long-term goal is to evolve this project from a secure Azure laboratory into a production-inspired cloud platform that demonstrates modern Cloud Security Engineering practices.
-
-Future versions will continue to prioritize:
-
-* Security by Design
-* Zero Trust Architecture
-* Infrastructure as Code
-* Governance
-* Automation
-* Observability
+* Network Isolation
+* Reduced Attack Surface
 * Scalability
-* Operational Excellence
+* Easier Governance
 
-By continuously improving the environment and incorporating additional Azure services, the project will remain aligned with Microsoft's recommended cloud architecture patterns and industry best practices.
+---
 
-Ultimately, this repository aims to serve not only as a technical portfolio project but also as a practical learning platform that reflects the knowledge, skills, and mindset required for a Cloud Security Engineer working in enterprise environments.
+# Identity & Access Management
+
+Identity security is implemented using Azure RBAC.
+
+The environment follows the Principle of Least Privilege, ensuring users receive only the permissions required to perform their responsibilities.
+
+Sensitive resources such as Azure Key Vault are protected using Azure RBAC together with Private Endpoints.
+
+---
+
+# Governance
+
+Governance controls include:
+
+* Azure Policy
+* Required Resource Tags
+* Allowed Azure Region
+* Resource Locks
+* Cost Management
+* Budget Monitoring
+
+These controls help maintain consistency while reducing configuration drift and operational risk.
+
+---
+
+# Monitoring
+
+Monitoring capabilities include:
+
+* Azure Monitor
+* Log Analytics Workspace
+* Diagnostic Settings
+* Azure Activity Logs
+* Azure Monitor Alerts
+* Action Groups
+
+These services provide centralized operational visibility and prepare the environment for future security monitoring.
+
+---
+
+# Cost Management
+
+The project was intentionally designed around Azure Free Tier services.
+
+Cost optimization includes:
+
+* Azure Budget
+* Cost Analysis
+* Resource Planning
+* Governance Controls
+
+The objective was to maintain cloud costs close to zero while implementing enterprise architecture concepts.
+
+---
+
+# Infrastructure as Code
+
+Terraform provides the foundation for Infrastructure as Code.
+
+Current structure:
+
+```text
+terraform/
+│
+├── provider.tf
+├── versions.tf
+├── variables.tf
+├── outputs.tf
+├── main.tf
+└── terraform.tfvars.example
+```
+
+Future versions will introduce reusable Terraform modules and automated deployment pipelines.
+
+---
+
+# Repository Structure
+
+```text
+enterprise-azure-security-environment
+│
+├── README.md
+├── docs/
+├── architecture/
+├── report/
+├── terraform/
+└── .github/
+```
+
+---
+
+# Skills Demonstrated
+
+## Cloud
+
+* Microsoft Azure
+* Azure Resource Management
+* Azure Governance
+
+## Networking
+
+* Hub-and-Spoke Architecture
+* Virtual Networks
+* Network Security Groups
+* Route Tables
+* Private Networking
+
+## Security
+
+* Azure RBAC
+* Azure Policy
+* Azure Key Vault
+* Managed Identity
+* Private Endpoints
+* Defense in Depth
+* Zero Trust
+
+## Monitoring
+
+* Azure Monitor
+* Log Analytics
+* Alert Rules
+* Diagnostic Settings
+
+## DevOps
+
+* Terraform
+* Infrastructure as Code
+* Git
+* GitHub
+
+---
+
+# Project Documentation
+
+Detailed documentation is available in the **docs/** directory.
+
+Included documents:
+
+* Project Overview
+* Security Controls
+* Cost Control
+* Lessons Learned
+* Future Improvements
+
+A complete technical report with implementation details, diagrams, and configuration screenshots is also included in the **report/** directory.
+
+---
+
+# Future Improvements
+
+Planned enhancements include:
+
+* Azure Firewall Premium
+* Microsoft Sentinel
+* Azure Bastion
+* Microsoft Entra PIM
+* Conditional Access
+* GitHub Actions CI/CD
+* Terraform Modules
+* Checkov Security Scanning
+* Azure Virtual WAN
+* Multi-Subscription Landing Zone
+
+---
+
+# Key Takeaways
+
+This project demonstrates how Microsoft Azure can be used to build a secure, well-governed, and scalable cloud foundation while remaining within Azure Free Tier limitations.
+
+It combines cloud architecture, security, networking, governance, monitoring, and Infrastructure as Code into a single enterprise-inspired environment that reflects modern Cloud Security Engineering practices.
+
+---
+
+# Author
+
+**Diogo Sequeira**
+
+Computer Engineering Student with a strong interest in Cloud Security, Microsoft Azure, and Infrastructure as Code.
+
+* GitHub: *(Add your profile link)*
+* LinkedIn: *(Add your profile link)*
+
+---
+
+# License
+
+This project is released under the MIT License.

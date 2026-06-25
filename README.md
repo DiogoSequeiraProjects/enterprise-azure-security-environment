@@ -1,4 +1,3 @@
-# Future Improvements
 
 # Introduction
 

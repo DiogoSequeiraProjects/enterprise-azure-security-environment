@@ -24,6 +24,7 @@ resource "azurerm_monitor_action_group" "main" {
 resource "azurerm_monitor_activity_log_alert" "resource_delete" {
   name                = "alert-resource-delete"
   resource_group_name = var.resource_group_name
+  location            = "global"
   scopes              = [var.subscription_id]
   description         = "Alert triggered when a resource deletion operation occurs."
 
@@ -42,6 +43,7 @@ resource "azurerm_monitor_activity_log_alert" "resource_delete" {
 resource "azurerm_monitor_activity_log_alert" "policy_assignment_write" {
   name                = "alert-policy-assignment-change"
   resource_group_name = var.resource_group_name
+  location            = "global"
   scopes              = [var.subscription_id]
   description         = "Alert triggered when an Azure Policy assignment is created or modified."
 

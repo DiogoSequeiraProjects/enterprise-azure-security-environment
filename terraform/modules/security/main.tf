@@ -16,7 +16,7 @@ resource "azurerm_key_vault" "main" {
   public_network_access_enabled = false
   purge_protection_enabled      = false
   soft_delete_retention_days    = 7
-  rbac_authorization_enabled = true     = true
+  rbac_authorization_enabled    = true
   tags                          = var.tags
 }
 
@@ -44,10 +44,4 @@ resource "azurerm_private_endpoint" "keyvault" {
     name                 = "pdzg-keyvault"
     private_dns_zone_ids = [azurerm_private_dns_zone.keyvault.id]
   }
-}
-
-resource "azurerm_key_vault_secret" "demo_secret" {
-  name         = "demo-secret"
-  value        = "This is a placeholder secret for portfolio demonstration."
-  key_vault_id = azurerm_key_vault.main.id
 }

@@ -9,7 +9,29 @@
 Enterprise-inspired Azure cloud environment implementing secure networking, governance, monitoring, and Infrastructure as Code following Microsoft best practices.
 
 ---
+Project Status: Completed
+Terraform: Modular Infrastructure as Code
+CI: GitHub Actions Terraform Validation
+Technical Report: Available in report/
 
+
+---
+# Project Highlights
+
+* Enterprise-inspired Azure Landing Zone.
+* Hub-and-Spoke Network Architecture
+* Zero Trust Security Principles
+* Azure RBAC with Least Privilege
+* Azure Key Vault with Private Endpoint
+* Azure Policy Governance
+* Azure Monitor & Log Analytics
+* Cost Management using Azure Budgets
+* Modular Terraform Infrastructure
+* GitHub Actions Validation Pipeline
+* Comprehensive Technical Documentation
+* 29-Page Technical Report
+
+---
 # Project Overview
 
 This project demonstrates the design and implementation of a secure Azure environment based on enterprise cloud architecture principles.
@@ -203,9 +225,23 @@ terraform/
 ├── outputs.tf
 ├── main.tf
 └── terraform.tfvars.example
+└── modules/
+    ├── resource-groups
+    ├── networking
+    ├── security
+    ├── monitoring
+    ├── identity
+    └── governance
 ```
 
 The Terraform configuration is organized into reusable modules for resource groups, networking, security, monitoring, identity, and governance.
+GitHub Actions automatically executes:
+
+Terraform Format
+Terraform Init
+Terraform Validate
+
+ensuring the Infrastructure as Code remains consistent after every commit.
 
 ---
 

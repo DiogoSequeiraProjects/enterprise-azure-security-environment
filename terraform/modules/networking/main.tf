@@ -72,10 +72,10 @@ resource "azurerm_subnet" "prod_data" {
 }
 
 resource "azurerm_virtual_network_peering" "hub_to_dev" {
-  name                      = "peer-hub-to-dev"
-  resource_group_name       = var.resource_group_name
-  virtual_network_name      = azurerm_virtual_network.hub.name
-  remote_virtual_network_id = azurerm_virtual_network.dev.id
+  name                         = "peer-hub-to-dev"
+  resource_group_name          = var.resource_group_name
+  virtual_network_name         = azurerm_virtual_network.hub.name
+  remote_virtual_network_id    = azurerm_virtual_network.dev.id
   allow_virtual_network_access = true
 }
 

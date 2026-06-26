@@ -80,10 +80,10 @@ resource "azurerm_virtual_network_peering" "hub_to_dev" {
 }
 
 resource "azurerm_virtual_network_peering" "dev_to_hub" {
-  name                      = "peer-dev-to-hub"
-  resource_group_name       = var.resource_group_name
-  virtual_network_name      = azurerm_virtual_network.dev.name
-  remote_virtual_network_id = azurerm_virtual_network.hub.id
+  name                         = "peer-dev-to-hub"
+  resource_group_name          = var.resource_group_name
+  virtual_network_name         = azurerm_virtual_network.dev.name
+  remote_virtual_network_id    = azurerm_virtual_network.hub.id
   allow_virtual_network_access = true
 }
 
@@ -96,10 +96,10 @@ resource "azurerm_virtual_network_peering" "hub_to_prod" {
 }
 
 resource "azurerm_virtual_network_peering" "prod_to_hub" {
-  name                      = "peer-prod-to-hub"
-  resource_group_name       = var.resource_group_name
-  virtual_network_name      = azurerm_virtual_network.prod.name
-  remote_virtual_network_id = azurerm_virtual_network.hub.id
+  name                         = "peer-prod-to-hub"
+  resource_group_name          = var.resource_group_name
+  virtual_network_name         = azurerm_virtual_network.prod.name
+  remote_virtual_network_id    = azurerm_virtual_network.hub.id
   allow_virtual_network_access = true
 }
 

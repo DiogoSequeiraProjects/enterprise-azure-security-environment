@@ -28,3 +28,15 @@ variable "tags" {
     Purpose     = "Cloud Security Portfolio"
   }
 }
+
+variable "subscription_id" {
+  description = "Azure Subscription ID used for monitoring alert scopes and governance policy assignments."
+  type        = string
+  default     = "00000000-0000-0000-0000-000000000000"
+}
+
+variable "alert_email" {
+  description = "Email address used for Azure Monitor alert notifications."
+  type        = string
+  default     = "your-email@example.com"
+}

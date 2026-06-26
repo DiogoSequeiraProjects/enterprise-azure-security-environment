@@ -205,7 +205,7 @@ terraform/
 └── terraform.tfvars.example
 ```
 
-Future versions will introduce reusable Terraform modules and automated deployment pipelines.
+The Terraform configuration is organized into reusable modules for resource groups, networking, security, monitoring, identity, and governance.
 
 ---
 

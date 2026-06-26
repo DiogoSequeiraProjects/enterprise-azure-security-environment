@@ -8,16 +8,16 @@ resource "azurerm_user_assigned_identity" "main" {
 }
 
 resource "azurerm_key_vault" "main" {
-  name                        = "kv-enterprise-weu-001"
-  location                    = var.location
-  resource_group_name         = var.resource_group_name
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
-  sku_name                    = "standard"
+  name                          = "kv-enterprise-weu-001"
+  location                      = var.location
+  resource_group_name           = var.resource_group_name
+  tenant_id                     = data.azurerm_client_config.current.tenant_id
+  sku_name                      = "standard"
   public_network_access_enabled = false
-  purge_protection_enabled    = false
-  soft_delete_retention_days  = 7
-  enable_rbac_authorization   = true
-  tags                        = var.tags
+  purge_protection_enabled      = false
+  soft_delete_retention_days    = 7
+  enable_rbac_authorization     = true
+  tags                          = var.tags
 }
 
 resource "azurerm_private_dns_zone" "keyvault" {
